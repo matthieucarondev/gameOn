@@ -57,10 +57,11 @@
           <span class="close" onclick="closeModal()"></span>
           <div class="modal-body">
             <form
+            id="formFull"
               name="reserve"
               action="index.html"
               method="get"
-              onsubmit="return validate();"
+              onsubmit="validate();"
             >
               <div
                 class="formData">
@@ -200,15 +201,26 @@
                 <br>
               </div>
               <input
-                class="btn-submit"
+                id="btn-submit"
                 type="submit"
-                class="button"
                 value="C'est parti"
+                onsubmit="openValidform()"
               />
             </form>
           </div>
         </div>
       </div>
+      <div id="">
+        <spam class="close" onclick="closeValidform()"></spam>
+        <p>Merci pour votre inscription</p>
+        <input 
+        type="button"
+        id="btn-close"
+        value="Fermer"
+        onclick="closeValidform()"
+        />
+      </div>
+
     </main>
     <footer>
       <p class="copyrights">

@@ -11,6 +11,7 @@ function editNav() {
 const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
+const Validform = document.getElementById("Valid-form");
 
 
 // launch modal event
@@ -22,4 +23,17 @@ function launchModal() {
 }
 // close modal form
 function closeModal() {
-  modalbg.style.display = "none";}
+  modalbg.style.display = "none";
+}
+// lauch valid form
+function openValidform() {
+  modalbg.style.display="none"
+  Validform.style.display ="block";
+}
+// close valid form
+function closeValidform() {
+  modalbg.style.display="none"
+  Validform.style.display="none"
+  document.getElementById("formFull").reset();
+
+}

@@ -187,7 +187,50 @@ main {
   padding: 15px 8%;
   margin: 15px auto;
 }
-
+/* validity form style */
+#validForm {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  background-color: rgba(26, 39, 156, 0.4);
+}
+#validForm-content{
+  text-align: center;
+  flex-wrap: wrap;
+  margin: 5% auto;
+  width: 100%;
+  max-width: 500px;
+  height: 780px;
+  animation-name: modalopen;
+  animation-duration: var(--modal-duration);
+  background: #232323;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  color: #fff;
+  padding-top: 10px;
+}
+#btn-close {
+  margin: 350px 0px 0px 28%;
+  background: #fe142f;
+  display: block;
+  border-radius: 7px;
+  font-size: 1rem;
+  padding: 12px 82px;
+  color: #fff;
+  cursor: pointer;
+  border: 0;
+}
+.validMessage {
+  font-size: 30px;
+  font-weight: normal;
+  margin-top: 300px;
+}
 label {
   font-family: var(--font-default);
   font-size: 17px;
@@ -321,7 +364,7 @@ input[data-error]::after {
 .close:after {
   transform: rotate(-45deg);
 }
-.btn-submit,
+#btn-submit,
 .btn-signup {
   background: #fe142f;
   display: block;
