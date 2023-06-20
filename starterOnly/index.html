@@ -203,14 +203,15 @@
                 id="btn-submit"
                 type="submit"
                 value="C'est parti"
-                onsubmit="openValidform()"
+                
               />
             </form>
           </div>
         </div>
       </div>
-      <div>
-        <spam class="close" onclick="closeValidform()"></spam>
+      <div id="valid-form">
+      <div id="validForm-content">
+        <spam class="close" ></spam>
         <p>Merci pour votre inscription</p>
         <input 
         type="button"
@@ -218,6 +219,7 @@
         value="Fermer"
         onclick="closeValidform()"
         />
+      </div>
       </div>
 
     </main>
