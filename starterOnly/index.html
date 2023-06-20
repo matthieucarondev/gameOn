@@ -57,11 +57,10 @@
           <span class="close" onclick="closeModal()"></span>
           <div class="modal-body">
             <form
-            id="formFull"
               name="reserve"
               action="index.html"
               method="get"
-              onsubmit="validate();"
+              onsubmit="return validate();"
             >
               <div
                 class="formData">
@@ -210,12 +209,12 @@
           </div>
         </div>
       </div>
-      <div id="">
+      <div>
         <spam class="close" onclick="closeValidform()"></spam>
         <p>Merci pour votre inscription</p>
         <input 
         type="button"
-        id="btn-close"
+        id=""
         value="Fermer"
         onclick="closeValidform()"
         />
