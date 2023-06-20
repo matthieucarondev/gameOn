@@ -60,7 +60,7 @@
               name="reserve"
               action="index.html"
               method="get"
-              onsubmit="return validate();"
+              onsubmit="return validate()"
             >
               <div
                 class="formData">
@@ -203,21 +203,21 @@
                 id="btn-submit"
                 type="submit"
                 value="C'est parti"
-                
+                onsubmit="openValidForm()"
               />
             </form>
           </div>
         </div>
       </div>
-      <div id="valid-form">
+      <div class="valid-form" style="display: block" >
       <div id="validForm-content">
-        <spam class="close" ></spam>
-        <p>Merci pour votre inscription</p>
+        <spam class="close" onclick="closeValidForm()"></spam>
+        <p class="validMessage" >Merci  pour votre inscription</p>
         <input 
         type="button"
-        id=""
-        value="Fermer"
-        onclick="closeValidform()"
+        id="btn-close"
+        value="fermer "
+        onclick="closeValidForm()"
         />
       </div>
       </div>

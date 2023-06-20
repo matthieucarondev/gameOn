@@ -187,8 +187,8 @@ main {
   padding: 15px 8%;
   margin: 15px auto;
 }
-/* validity form style */
-#valid-form {
+/* validity form style*/ 
+.valid-form {
   display: none;
   position: fixed;
   z-index: 1;

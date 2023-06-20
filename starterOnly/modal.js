@@ -11,7 +11,7 @@ function editNav() {
 const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
-const validForm = document.getElementById("valid-form");
+const validForm = document.querySelector(".valid-form");
 
 
 // launch modal event
@@ -25,4 +25,13 @@ function launchModal() {
 function closeModal() {
   modalbg.style.display = "none";
 }
-
+// launch valid form
+function openValidForm() {
+modalbg.style.display = "none";
+validForm.style.display = "block";
+}
+// close valid form
+function closeValidForm() {
+  modalbg.style.display = "none";
+  validForm.style.display = "none";
+}
