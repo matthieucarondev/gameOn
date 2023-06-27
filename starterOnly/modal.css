@@ -188,7 +188,7 @@ main {
   margin: 15px auto;
 }
 /* validity form style*/ 
-.valid-form {
+#valid-form {
   display: none;
   position: fixed;
   z-index: 1;

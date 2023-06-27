@@ -201,15 +201,15 @@
               </div>
               <input
                 id="btn-submit"
-                type="submit"
+                type="button"
                 value="C'est parti"
-                onsubmit="openValidForm()"
+                onclick="openValidForm()"
               />
             </form>
           </div>
         </div>
       </div>
-      <div class="valid-form" style="display: block" >
+      <div id="valid-form">
       <div id="validForm-content">
         <spam class="close" onclick="closeValidForm()"></spam>
         <p class="validMessage" >Merci  pour votre inscription</p>

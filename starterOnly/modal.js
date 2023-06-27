@@ -8,30 +8,33 @@ function editNav() {
 }
 
 // DOM Elements
-const modalbg = document.querySelector(".bground");
-const modalBtn = document.querySelectorAll(".modal-btn");
-const formData = document.querySelectorAll(".formData");
-const validForm = document.querySelector(".valid-form");
+const modalbg = document.querySelector('.bground');
+const modalBtn = document.querySelectorAll('.modal-btn');
+const formData = document.querySelectorAll('.formData');
+const validForm = document.getElementById('valid-form');
+
+const FirstName = document.getElementById('first');
 
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
 // launch modal form
-function launchModal() {
+function launchModal(){
   modalbg.style.display = "block";
 }
 // close modal form
-function closeModal() {
+function closeModal(){
   modalbg.style.display = "none";
 }
 // launch valid form
-function openValidForm() {
-modalbg.style.display = "none";
-validForm.style.display = "block";
+function openValidForm(){
+modalbg.style.display = "none"
+validForm.style.display="block";
 }
 // close valid form
 function closeValidForm() {
-  modalbg.style.display = "none";
-  validForm.style.display = "none";
+  modalbg.style.display = "none"
+  validForm.style.display = "none"; 
 }
+
