@@ -266,11 +266,7 @@ function checkValid() {
     checkboxMessage.innerHTML = errors.errorCheckbox;
 
     return false;
-  } else if (!checkboxTwo.checked) {
-    let checkboxMessage = document.getElementById("checkboxMessage");
-    checkboxMessage.innerHTML = errors.errorCheckbox;
 
-    return false;
   } else {
     document
       .getElementById("checkboxMessage")
