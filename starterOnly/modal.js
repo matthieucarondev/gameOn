@@ -13,63 +13,61 @@ const modalBtn = document.querySelectorAll('.modal-btn');
 const formData = document.querySelectorAll('.formData');
 const closeForm = document.getElementById('close');
 const closeMessage = document.getElementById('closeMessage');
-const allData =document.getElementById('allData');
+const allData = document.getElementById('allData');
 
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
 // launch modal form
-function launchModal(){
+function launchModal() {
   modalbg.style.display = "block";
 }
 // close modal form & reset
 
-function closeModal(){
+function closeModal() {
   modalbg.style.display = "none";
   allData.reset();
 }
-closeForm.addEventListener("click",closeModal);
+closeForm.addEventListener("click", closeModal);
 
 //    Id formulaire
 
+let firstName = document.getElementById('firstname');
+let lastName = document.getElementById('lastname');
+let email = document.getElementById('email');
+let birthdate = document.getElementById('birthdate');
+let numberTournoi = document.getElementById('quantity');
+let locations = document.getElementsByClassName('location');
+let checkbox = document.getElementById('checkbox1');
+let checkboxTwo = document.getElementById('checkbox2');
+let comfirmForm = document.getElementById("valid-form");
 
-
-
-let firstName= document.getElementById('firstname');
-let lastName=document.getElementById('lastname');
-let email=document.getElementById('email');
-let birthdate=document.getElementById('birthdate');
-let numberTournoi=document.getElementById('quantity');
-//let location=document.getElementsByClassName();
-//let checkbox=document.getElementById();
-//let checkboxTwo=document.getElementById();
-let comfirmForm=document.getElementById("valid-form");
-//let buttonValid=document.getElementById();
 //Regex
-const nameRegEx = new RegExp(/^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/i);
-const emailRegEx =new RegExp("[a-z0-9]+@[a-z]+.[a-z]{2,3}");
-const quantityRegEx = /([0-9])$/;
+const nameRegEx = new RegExp(/([A-Za-z-])+$/);
+const emailRegEx = new RegExp("[a-z0-9]+@[a-z]+.[a-z]{2,3}");
+const quantityRegEx = new RegExp(/([0-9])$/);
+const birthRGEX = new RegExp(/^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/);
 //message error
 
-const errors ={
-errorName1:"2 caractères minimum",
-errorName2:"Seul l'alphabet est accépté",
-errorName3:"2 caractères minimum",
-errorName4: "Seul l'alphabet est accépté",
-errorEmail: "Veuillez entrer une adresse mail valide",
-birthdateError2:"Veuillez entrer une date de naissance.",
-errorBirthdateYear: "age minimun 18 ans",
-errorQuantity:"Veuillez entrer un nombre",
+const errors = {
+  errorName1: "2 caractères minimum",
+  errorName2: "Seul l'alphabet est accépté",
+  errorName3: "2 caractères minimum",
+  errorName4: "Seul l'alphabet est accépté",
+  errorEmail: "Veuillez entrer une adresse mail valide",
+  birthdateError2: "Veuillez entrer une date de naissance.",
+  birthdateError: "format invalide",
+  errorBirthdateYear: "age minimun 18 ans",
+  errorQuantity: "Veuillez entrer un nombre",
+  errorLocation: "Veuillez choisir une ville",
+  errorCheckbox: "Vous devez valider cette deux case",
 
-//errorCheckbox: "Vous devez valider cette case",
-//errorLocation: "Veuillez choisir une ville",
 }
-//message validation formulaire  plus  fermeture modal*/
-allData.addEventListener("submit",function(event){
+//message validation formulaire  plus  fermeture modal
+allData.addEventListener("submit", function (event) {
   event.preventDefault();
-  console.log(event);
-  if(validateForm()){
+  if (validateForm()) {
     closeModal();
     launchValid();
     return true;
@@ -77,21 +75,23 @@ allData.addEventListener("submit",function(event){
   return false
 });
 //Les fonctions utilisées pour les input
- function validateForm () {
-    firstNameValid();
-    lastNameValid()
-    emailValid()
-    birthdateValid() 
-    quantityValid()
-    if (firstNameValid() && lastNameValid()&& emailValid()&& birthdateValid() && quantityValid() ) {
+function validateForm() {
+  firstNameValid()
+  lastNameValid()
+  emailValid()
+  birthdateValid()
+  quantityValid()
+  locationValid()
+  checkValid()
+  if (firstNameValid() && lastNameValid() && emailValid() && birthdateValid() && quantityValid() && locationValid() && checkValid()) {
 
-        return true;
+    return true;
 
-    } else {
+  } else {
 
-        return false;
-    }
- }
+    return false;
+  }
+}
 
 //             prénom & nom 
 /*On vérifie :
@@ -100,69 +100,69 @@ allData.addEventListener("submit",function(event){
 si ce n'est pas le cas :
  - on affiche un message d'erreur et le cadre du champs devient rouge
  */
- function firstNameValid(){
-  if (firstName.value.length < 2){
+function firstNameValid() {
+  if (firstName.value.length < 2) {
     let firstNameMessage = document.getElementById("firstnameError");
-    firstNameMessage.innerHTML=errors.errorName1;
-    firstName.style.border= '2px solid red';
+    firstNameMessage.innerHTML = errors.errorName1;
+    firstName.style.border = '2px solid red';
     return false;
-  }else if (!nameRegEx.test(firstName.value)){
-    let firstNameMessage =document.getElementById("firstnameError");
-    firstNameMessage.innerHTML=errors.errorName2;
-    firstName.style.border= '2px solid red'
+  } else if (!nameRegEx.test(firstName.value)) {
+    let firstNameMessage = document.getElementById("firstnameError");
+    firstNameMessage.innerHTML = errors.errorName2;
+    firstName.style.border = '2px solid red'
     return false;
-  }else {
-     document
-            .getElementById("firstnameError")
-            .innerHTML = "";
+  } else {
+    document
+      .getElementById("firstnameError")
+      .innerHTML = "";
 
-        firstName.style.border = '2px solid white';
+    firstName.style.border = '2px solid white';
 
-        return true;
+    return true;
   }
- }
- function lastNameValid(){
-  if (lastName.value.length <2){
+}
+function lastNameValid() {
+  if (lastName.value.length < 2) {
     let lastNameMessage = document.getElementById("lastnameError");
-    lastNameMessage.innerHTML=errors.errorName3;
-    lastName.style.border= '2px solid red';
+    lastNameMessage.innerHTML = errors.errorName3;
+    lastName.style.border = '2px solid red';
     return false;
-  }else if (!nameRegEx.test(lastName.value)){
+  } else if (!nameRegEx.test(lastName.value)) {
     let lastNameMessage = document.getElementById("lastnameError");
-    lastNameMessage.innerHTML=errors.errorName4;
-    lastName.style.border= '2px solid red';
+    lastNameMessage.innerHTML = errors.errorName4;
+    lastName.style.border = '2px solid red';
     return false;
-  }else {
-     document
-            .getElementById("lastnameError")
-            .innerHTML = "";
+  } else {
+    document
+      .getElementById("lastnameError")
+      .innerHTML = "";
 
-        lastName.style.border = '2px solid white';
+    lastName.style.border = '2px solid white';
 
-        return true;
+    return true;
   }
- }
+}
 
- // email
- /*On vérifie si :
- - la valeur saisie correspond aux conditions du regex
+// email
+/*On vérifie si :
+- la valeur saisie correspond aux conditions du regex
 si ce n'est pas le cas:
- - on affiche un message d'erreur et le cadre du champs devient rouge
- */
+- on affiche un message d'erreur et le cadre du champs devient rouge
+*/
 function emailValid() {
-  if(emailRegEx.test(email.value) == false){
-    let emailMessage =document.getElementById("emailError");
+  if (emailRegEx.test(email.value) == false) {
+    let emailMessage = document.getElementById("emailError");
     emailMessage.innerHTML = errors.errorEmail;
 
-    email.style.border ='2px solid red' ;
+    email.style.border = '2px solid red';
 
-    return false ;
+    return false;
   } else {
-    document 
-    .getElementById('emailError')
-    .innerHTML ="";
-    email.style.border ='2px solid white';
-    return true ;
+    document
+      .getElementById('emailError')
+      .innerHTML = "";
+    email.style.border = '2px solid white';
+    return true;
   }
 }
 // date anniversaire
@@ -177,74 +177,113 @@ function emailValid() {
   currentYear(l'année actuelle) moins la valeur saisie est inférieur à 18 ans
   Dans ce cas là, on affiche un message d'erreur et le cadre devient rouge
  */
-let today = new Date(); //Récupère la date actuelle
-let currentYear = today.getFullYear(); // Stock l'année dans currentYear
-let daysInMonth = [         //on donne un nombre de jour maximum aux mois
-    31,
-    29,
-    31,
-    30,
-    31,
-    30,
-    31,
-    31,
-    30,
-    31,
-    30,
-    31
-];
 function birthdateValid() {
-  let vari = new Date(birthdate.value);
-  if (birthdate.value.length < 1) {
-    let birthdatMessage2 = document.getElementById('birthdateError');
-    birthdatMessage2.innerHTML = errors.birthdateError2;
+  const vari = new Date(birthdate.value);
+  const today = new Date(); //Récupère la date actuelle
+  const diffTime = today.getTime() - vari.getTime();//diff entre les date
+  const diffDays = diffTime / (1000 * 3600 * 24); // Conversion en jours
+  const age = diffDays / 365.25; // Conversion en années
+  if (birthRGEX.test(birthdate)) {
+    let birthdatMessage = document.getElementById('birthdateError');
+    birthdatMessage.innerHTML = errors.birthdateError;
+    birthdate.style.border = '2px solid red';
+    return false;
+  } else if (birthdate.value.length < 1) {
+    let birthDateMessage2 = document.getElementById('birthdateError');
+    birthDateMessage2.innerHTML = errors.birthdateError2;
 
-    birthdate.style.border ='2px solid red';
+    birthdate.style.border = '2px solid red';
 
     return false;
-  } else if (currentYear - vari.getFullYear() < 18 ) {
-        let yearMessage = document.getElementById('birthdateError');
-        yearMessage.innerHTML = errors.errorBirthdateYear;
+  } else if ((birthdate.value == "") || (age <= 18)) {
+    let birthdatMessage2 = document.getElementById('birthdateError');
+    birthdatMessage2.innerHTML = errors.errorBirthdateYear;
 
-        birthdate.style.border = '2px solid red';
+    birthdate.style.border = '2px solid red';
 
-        return false;
+    return false;
 
-  }else {
-    document.getElementById('birthdate').innerHTML="";
-     
-    birthdate.style.border='2px solid white';
+  } else {
+    document.getElementById('birthdateError').innerHTML = "";
+
+    birthdate.style.border = '2px solid white';
     return true;
   }
 }
-  //nombre de numberTournoi
+//nombre de numberTournoi
 /* On vérifie 
  - si la valeur entrée dans le champs est inférieur à 1
   si ce n'est pas le cas :
  - on affiche un message d'erreur et le cadre du champs devient rouge
  */
-function quantityValid(){
-  if (numberTournoi.value.length <1){
-    let quantityMessage =document.getElementById('quantityError');
-    quantityMessage.innerHTML=errors.errorQuantity;
+function quantityValid() {
+  if (numberTournoi.value.length < 1) {
+    let quantityMessage = document.getElementById('quantityError');
+    quantityMessage.innerHTML = errors.errorQuantity;
 
-    numberTournoi.style.border ='2px solid red ';
+    numberTournoi.style.border = '2px solid red ';
     return false;
-  }else {
+  } else {
     document
-            .getElementById('quantityError')
-            .innerHTML="";
+      .getElementById('quantityError')
+      .innerHTML = "";
 
-    numberTournoi.style.border='2px solid white';
+    numberTournoi.style.border = '2px solid white';
+    return true;
+  }
+}
+// location
+/* On vérifie si :
+ - au moins une des cases a été validé en parcourant le tableau avec i++
+  Si ce n'est pas le cas :
+ - on affiche un message d'erreur
+ */
+function locationValid() {
+  const result = Array.from(locations).filter(
+    (loca) => loca.checked === true
+  );
+  if (result.length <= 0) {
+    let locationMessage = document.getElementById('locationMessage');
+    locationMessage.innerHTML = errors.errorLocation;
+    return false;
+  } else {
+    document
+      .getElementById('locationMessage')
+      .innerHTML = "";
+    return true;
+
+  }
+}
+// checkbox
+/* On vérifie  si :
+- la checkbox n'est pas validé
+- on affiche un message d'erreur
+function checkbox */
+function checkValid() {
+  if (!checkbox.checked) {
+
+    let checkboxMessage = document.getElementById("checkboxMessage");
+    checkboxMessage.innerHTML = errors.errorCheckbox;
+
+    return false;
+  } else if (!checkboxTwo.checked) {
+    let checkboxMessage = document.getElementById("checkboxMessage");
+    checkboxMessage.innerHTML = errors.errorCheckbox;
+
+    return false;
+  } else {
+    document
+      .getElementById("checkboxMessage")
+      .innerHTML = "";
+
     return true;
   }
 }
 
-
 function launchValid() {
-   comfirmForm.style.display = "block";
+  comfirmForm.style.display = "block";
 }
 function closeConfirmation() {
-  comfirmForm.style.display = "none";
+  comfirmForm.style.display = "none";//on ferme avec le bouton fermer
 }
-closeMessage.addEventListener("click",closeConfirmation);
+closeMessage.addEventListener("click", closeConfirmation);// on ferme avec la croix
