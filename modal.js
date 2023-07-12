@@ -53,14 +53,12 @@ const birthRGEX = new RegExp(/^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01]
 
 const errors = {
   errorName: "2 caractères minimum ou caractére invalide",
-
-
   errorEmail: "Veuillez entrer une adresse mail valide",
   birthdateError: "Veuillez entrer une date de naissance.",
   errorBirthdateYear: "age minimun 18 ans",
   errorQuantity: "Veuillez entrer un nombre",
   errorLocation: "Veuillez choisir une ville",
-  errorCheckbox: "Vous devez valider cette deux case",
+  errorCheckbox: "Vous devez valider cette case",
 
 }
 //message validation formulaire  plus  fermeture modal
@@ -100,7 +98,7 @@ function firstNameValid() {
   if (!nameRegEx.test(firstName.value)) {
     firstNameMessage.innerHTML = errors.errorName;
     firstNameMessage.style.color= '#ff0000';
-    firstName.style.border = '2px solid red';
+    firstName.style.border = '2px solid #ff0000';
     return false;
   } else {
       firstNameMessage.innerHTML = "";
@@ -113,7 +111,7 @@ function lastNameValid() {
   if (!nameRegEx.test(lastName.value)) {
     lastNameMessage.innerHTML = errors.errorName;
     lastNameMessage.style.color= '#ff0000';
-    lastName.style.border = '2px solid red';
+    lastName.style.border = '2px solid #ff0000';
     return false;
   } else {
       lastNameMessage.innerHTML = "";
@@ -133,7 +131,7 @@ function emailValid() {
   if (!emailRegEx.test(email.value)) {
     emailMessage.innerHTML = errors.errorEmail;
     emailMessage.style.color ='#ff0000';
-    email.style.border = '2px solid red';
+    email.style.border = '2px solid #ff0000';
     return false;
   } else {
       emailMessage.innerHTML = "";
@@ -163,11 +161,11 @@ function birthdateValid() {
   if (!birthRGEX.test(birthdate.value)) {
     birthdatMessage.innerHTML = errors.birthdateError;
      birthdatMessage.style.color='#ff0000';
-    birthdate.style.border = '2px solid red';
+    birthdate.style.border = '2px solid #ff0000';
     return false;
   } else if ((birthdate.value == "") || (age <= 18)) {
     birthdatMessage.innerHTML = errors.errorBirthdateYear;
-    birthdate.style.border = '2px solid red';
+    birthdate.style.border = '2px solid #ff0000';
      birthdatMessage.style.color='#ff0000';
     return false;
   } else {
@@ -187,7 +185,7 @@ function quantityValid() {
   if (numberTournoi.value.length < 1) {
     quantityMessage.innerHTML = errors.errorQuantity;
     quantityMessage.style.color='#ff0000';
-    numberTournoi.style.border = '2px solid red ';
+    numberTournoi.style.border = '2px solid #ff0000 ';
     return false;
   } else {
     quantityMessage.innerHTML = "";
@@ -222,13 +220,13 @@ function locationValid() {
 function checkbox */
 function checkValid() {
    let checkboxMessage = document.getElementById("checkboxMessage");
-  if (!checkbox.checked) {
-    checkboxMessage.innerHTML = errors.errorCheckbox;
-
-    return false;
+  if (checkbox.checked) {
+ checkboxMessage .innerHTML = "";
+     return false;
   } else {
-     checkboxMessage .innerHTML = "";
-    return true;
+     checkboxMessage.innerHTML = errors.errorCheckbox;
+     checkboxMessage.style.color='#ff0000';
+   return true;
   }
 }
 
