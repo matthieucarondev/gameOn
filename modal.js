@@ -29,6 +29,7 @@ function closeModal() {
   modalbg.style.display = "none";
   allData.reset();
 }
+delete errors ;
 closeForm.addEventListener("click", closeModal);
 
 //    Id formulaire
@@ -44,20 +45,18 @@ let checkboxTwo = document.getElementById('checkbox2');
 let comfirmForm = document.getElementById("valid-form");
 
 //Regex
-const nameRegEx = new RegExp(/([A-Za-z-])+$/);
+const nameRegEx = new RegExp(/([A-Za-z-]){2,}$/);
 const emailRegEx = new RegExp("[a-z0-9]+@[a-z]+.[a-z]{2,3}");
 const quantityRegEx = new RegExp(/([0-9])$/);
 const birthRGEX = new RegExp(/^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/);
 //message error
 
 const errors = {
-  errorName1: "2 caractères minimum",
-  errorName2: "Seul l'alphabet est accépté",
-  errorName3: "2 caractères minimum",
-  errorName4: "Seul l'alphabet est accépté",
+  errorName: "2 caractères minimum ou caractére invalide",
+
+
   errorEmail: "Veuillez entrer une adresse mail valide",
-  birthdateError2: "Veuillez entrer une date de naissance.",
-  birthdateError: "format invalide",
+  birthdateError: "Veuillez entrer une date de naissance.",
   errorBirthdateYear: "age minimun 18 ans",
   errorQuantity: "Veuillez entrer un nombre",
   errorLocation: "Veuillez choisir une ville",
@@ -76,22 +75,17 @@ allData.addEventListener("submit", function (event) {
 });
 //Les fonctions utilisées pour les input
 function validateForm() {
-  firstNameValid()
-  lastNameValid()
-  emailValid()
-  birthdateValid()
-  quantityValid()
-  locationValid()
-  checkValid()
-  if (firstNameValid() && lastNameValid() && emailValid() && birthdateValid() && quantityValid() && locationValid() && checkValid()) {
+ const isfirstNameValid = firstNameValid()
+ const islastNameValid =lastNameValid()
+const isemailValid =  emailValid()
+ const isbirthdateValid = birthdateValid()
+  const isquantityValid = quantityValid()
+ const islocationValid =locationValid()
+  const ischeckValid= checkValid()
+ return isfirstNameValid && islastNameValid && isemailValid && isbirthdateValid && isquantityValid && islocationValid && ischeckValid }
+   
 
-    return true;
 
-  } else {
-
-    return false;
-  }
-}
 
 //             prénom & nom 
 /*On vérifie :
@@ -101,44 +95,29 @@ si ce n'est pas le cas :
  - on affiche un message d'erreur et le cadre du champs devient rouge
  */
 function firstNameValid() {
-  if (firstName.value.length < 2) {
-    let firstNameMessage = document.getElementById("firstnameError");
-    firstNameMessage.innerHTML = errors.errorName1;
+   let firstNameMessage = document.getElementById("firstnameError");
+   const messageError = firstNameMessage.innerHTML;
+  if (!nameRegEx.test(firstName.value)) {
+    firstNameMessage.innerHTML = errors.errorName;
+    firstNameMessage.style.color= '#ff0000';
     firstName.style.border = '2px solid red';
     return false;
-  } else if (!nameRegEx.test(firstName.value)) {
-    let firstNameMessage = document.getElementById("firstnameError");
-    firstNameMessage.innerHTML = errors.errorName2;
-    firstName.style.border = '2px solid red'
-    return false;
   } else {
-    document
-      .getElementById("firstnameError")
-      .innerHTML = "";
-
+      firstNameMessage.innerHTML = "";
     firstName.style.border = '2px solid white';
-
     return true;
   }
 }
 function lastNameValid() {
-  if (lastName.value.length < 2) {
-    let lastNameMessage = document.getElementById("lastnameError");
-    lastNameMessage.innerHTML = errors.errorName3;
-    lastName.style.border = '2px solid red';
-    return false;
-  } else if (!nameRegEx.test(lastName.value)) {
-    let lastNameMessage = document.getElementById("lastnameError");
-    lastNameMessage.innerHTML = errors.errorName4;
+   let lastNameMessage = document.getElementById("lastnameError");
+  if (!nameRegEx.test(lastName.value)) {
+    lastNameMessage.innerHTML = errors.errorName;
+    lastNameMessage.style.color= '#ff0000';
     lastName.style.border = '2px solid red';
     return false;
   } else {
-    document
-      .getElementById("lastnameError")
-      .innerHTML = "";
-
+      lastNameMessage.innerHTML = "";
     lastName.style.border = '2px solid white';
-
     return true;
   }
 }
@@ -150,17 +129,14 @@ si ce n'est pas le cas:
 - on affiche un message d'erreur et le cadre du champs devient rouge
 */
 function emailValid() {
-  if (emailRegEx.test(email.value) == false) {
-    let emailMessage = document.getElementById("emailError");
+   let emailMessage = document.getElementById("emailError");
+  if (!emailRegEx.test(email.value)) {
     emailMessage.innerHTML = errors.errorEmail;
-
+    emailMessage.style.color ='#ff0000';
     email.style.border = '2px solid red';
-
     return false;
   } else {
-    document
-      .getElementById('emailError')
-      .innerHTML = "";
+      emailMessage.innerHTML = "";
     email.style.border = '2px solid white';
     return true;
   }
@@ -183,29 +159,19 @@ function birthdateValid() {
   const diffTime = today.getTime() - vari.getTime();//diff entre les date
   const diffDays = diffTime / (1000 * 3600 * 24); // Conversion en jours
   const age = diffDays / 365.25; // Conversion en années
-  if (birthRGEX.test(birthdate)) {
-    let birthdatMessage = document.getElementById('birthdateError');
+  let birthdatMessage = document.getElementById('birthdateError');
+  if (!birthRGEX.test(birthdate.value)) {
     birthdatMessage.innerHTML = errors.birthdateError;
+     birthdatMessage.style.color='#ff0000';
     birthdate.style.border = '2px solid red';
-    return false;
-  } else if (birthdate.value.length < 1) {
-    let birthDateMessage2 = document.getElementById('birthdateError');
-    birthDateMessage2.innerHTML = errors.birthdateError2;
-
-    birthdate.style.border = '2px solid red';
-
     return false;
   } else if ((birthdate.value == "") || (age <= 18)) {
-    let birthdatMessage2 = document.getElementById('birthdateError');
-    birthdatMessage2.innerHTML = errors.errorBirthdateYear;
-
+    birthdatMessage.innerHTML = errors.errorBirthdateYear;
     birthdate.style.border = '2px solid red';
-
+     birthdatMessage.style.color='#ff0000';
     return false;
-
   } else {
-    document.getElementById('birthdateError').innerHTML = "";
-
+    birthdatMessage.innerHTML = "";
     birthdate.style.border = '2px solid white';
     return true;
   }
@@ -216,18 +182,15 @@ function birthdateValid() {
   si ce n'est pas le cas :
  - on affiche un message d'erreur et le cadre du champs devient rouge
  */
-function quantityValid() {
+function quantityValid() { 
+  let quantityMessage = document.getElementById('quantityError');
   if (numberTournoi.value.length < 1) {
-    let quantityMessage = document.getElementById('quantityError');
     quantityMessage.innerHTML = errors.errorQuantity;
-
+    quantityMessage.style.color='#ff0000';
     numberTournoi.style.border = '2px solid red ';
     return false;
   } else {
-    document
-      .getElementById('quantityError')
-      .innerHTML = "";
-
+    quantityMessage.innerHTML = "";
     numberTournoi.style.border = '2px solid white';
     return true;
   }
@@ -240,18 +203,16 @@ function quantityValid() {
  */
 function locationValid() {
   const result = Array.from(locations).filter(
-    (loca) => loca.checked === true
-  );
-  if (result.length <= 0) {
+    (loca) => loca.checked === true);
     let locationMessage = document.getElementById('locationMessage');
+  if (result.length <= 0) {
     locationMessage.innerHTML = errors.errorLocation;
+    locationMessage.style.color='#ff0000';
+    locations.style.background ='#ff0000 ';
     return false;
   } else {
-    document
-      .getElementById('locationMessage')
-      .innerHTML = "";
+      locationMessage.innerHTML = "";
     return true;
-
   }
 }
 // checkbox
@@ -260,18 +221,13 @@ function locationValid() {
 - on affiche un message d'erreur
 function checkbox */
 function checkValid() {
+   let checkboxMessage = document.getElementById("checkboxMessage");
   if (!checkbox.checked) {
-
-    let checkboxMessage = document.getElementById("checkboxMessage");
     checkboxMessage.innerHTML = errors.errorCheckbox;
 
     return false;
-
   } else {
-    document
-      .getElementById("checkboxMessage")
-      .innerHTML = "";
-
+     checkboxMessage .innerHTML = "";
     return true;
   }
 }
