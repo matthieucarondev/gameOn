@@ -1,3 +1,12 @@
+const colorMessageErr = "#ff0000";
+const borderImputErr = '2px solid #ff0000';
+const borderImputNoErr=  '2px solid white';
+const messageNoErr = "" ;
+const display = "block";
+const noDisplay= "none";
+
+
+
 function editNav() {
   var x = document.getElementById("myTopnav");
   if (x.className === "topnav") {
@@ -28,32 +37,32 @@ modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
 // launch modal form
 function launchModal() {
-  modalbg.style.display = "block";
+  modalbg.style.display = display;
 
-  firstNameMessage.innerHTML = "";
-  firstName.style.border = '2px solid white';
+  firstNameMessage.innerHTML = messageNoErr;
+  firstName.style.border = borderImputNoErr;
 
-     lastNameMessage.innerHTML = "";
-    lastName.style.border = '2px solid white';
+     lastNameMessage.innerHTML = messageNoErr;
+    lastName.style.border = borderImputNoErr;
 
-    emailMessage.innerHTML = "";
-    email.style.border = '2px solid white';
+    emailMessage.innerHTML = messageNoErr;
+    email.style.border = borderImputNoErr;
 
-    birthdatMessage.innerHTML = "";
-    birthdate.style.border = '2px solid white';
+    birthdatMessage.innerHTML = messageNoErr;
+    birthdate.style.border = borderImputNoErr;
 
-    quantityMessage.innerHTML = "";
-    numberTournoi.style.border = '2px solid white';
+    quantityMessage.innerHTML = messageNoErr;
+    numberTournoi.style.border = borderImputNoErr;
 
-    locationMessage.innerHTML = "";
+    locationMessage.innerHTML = messageNoErr;
 
-    checkboxMessage .innerHTML = "";
+    checkboxMessage .innerHTML = messageNoErr;
     
 }
 // close modal form & reset
 
 function closeModal() {
-  modalbg.style.display = "none";
+  modalbg.style.display = noDisplay;
   allData.reset();
   
 }
@@ -67,10 +76,16 @@ let lastName = document.getElementById('lastname');
 let email = document.getElementById('email');
 let birthdate = document.getElementById('birthdate');
 let numberTournoi = document.getElementById('quantity');
-let locations = document.getElementsByClassName('location');
+let locations = document.querySelectorAll('input[name="location"]');
 let checkbox = document.getElementById('checkbox1');
 let comfirmForm = document.getElementById("valid-form");
-
+//  radio  //
+const loc1 = locations[0]; // Permet de cibler directement le radio choisi New York
+const loc2 = locations[1]; // Permet de cibler directement le radio choisi SanFrancisco
+const loc3 = locations[2]; // Permet de cibler directement le radio choisi Seattle
+const loc4 = locations[3]; // Permet de cibler directement le radio choisi Chicago
+const loc5 = locations[4]; // Permet de cibler directement le radio choisi Boston 
+const loc6 = locations[5]; // Permet de cibler directement le radio choisi Portland
 //Regex
 const nameRegEx = new RegExp(/([A-Za-z-]){2,}$/);
 const emailRegEx = new RegExp("[a-z0-9]+@[a-z]+.[a-z]{2,3}");
@@ -124,24 +139,24 @@ function firstNameValid() {
    
   if (!nameRegEx.test(firstName.value)) {
     firstNameMessage.innerHTML = errors.errorName;
-    firstNameMessage.style.color= '#ff0000';
-    firstName.style.border = '2px solid #ff0000';
+    firstNameMessage.style.color= colorMessageErr;
+    firstName.style.border = borderImputErr;
     return false;
   } else {
-      firstNameMessage.innerHTML = "";
-    firstName.style.border = '2px solid white';
+      firstNameMessage.innerHTML = messageNoErr;
+    firstName.style.border = borderImputNoErr;
     return true;
   }
 }
 function lastNameValid() { 
   if (!nameRegEx.test(lastName.value)) {
     lastNameMessage.innerHTML = errors.errorName;
-    lastNameMessage.style.color= '#ff0000';
-    lastName.style.border = '2px solid #ff0000';
+    lastNameMessage.style.color= colorMessageErr;
+    lastName.style.border = borderImputErr;
     return false;
   } else {
-      lastNameMessage.innerHTML = "";
-    lastName.style.border = '2px solid white';
+      lastNameMessage.innerHTML = messageNoErr;
+    lastName.style.border = borderImputNoErr;
     return true;
   }
 }
@@ -156,12 +171,12 @@ function emailValid() {
   
   if (!emailRegEx.test(email.value)) {
     emailMessage.innerHTML = errors.errorEmail;
-    emailMessage.style.color ='#ff0000';
-    email.style.border = '2px solid #ff0000';
+    emailMessage.style.color =colorMessageErr;
+    email.style.border = borderImputErr;
     return false;
   } else {
-      emailMessage.innerHTML = "";
-    email.style.border = '2px solid white';
+      emailMessage.innerHTML = messageNoErr;
+    email.style.border = borderImputNoErr;
     return true;
   }
 }
@@ -186,17 +201,17 @@ function birthdateValid() {
   
   if (!birthRGEX.test(birthdate.value)) {
     birthdatMessage.innerHTML = errors.birthdateError;
-     birthdatMessage.style.color='#ff0000';
-    birthdate.style.border = '2px solid #ff0000';
+     birthdatMessage.style.color=colorMessageErr;
+    birthdate.style.border = borderImputErr;
     return false;
-  } else if ((birthdate.value == "") || (age <= 18)) {
+  } else if ((age < 18)) {
     birthdatMessage.innerHTML = errors.errorBirthdateYear;
-    birthdate.style.border = '2px solid #ff0000';
-     birthdatMessage.style.color='#ff0000';
+    birthdate.style.border = borderImputErr;
+     birthdatMessage.style.color=colorMessageErr;
     return false;
   } else {
-    birthdatMessage.innerHTML = "";
-    birthdate.style.border = '2px solid white';
+    birthdatMessage.innerHTML = messageNoErr;
+    birthdate.style.border = borderImputNoErr;
     return true;
   }
 }
@@ -210,12 +225,12 @@ function quantityValid() {
  
   if (numberTournoi.value.length < 1) {
     quantityMessage.innerHTML = errors.errorQuantity;
-    quantityMessage.style.color='#ff0000';
-    numberTournoi.style.border = '2px solid #ff0000 ';
+    quantityMessage.style.color=colorMessageErr;
+    numberTournoi.style.border = borderImputErr;
     return false;
   } else {
-    quantityMessage.innerHTML = "";
-    numberTournoi.style.border = '2px solid white';
+    quantityMessage.innerHTML = messageNoErr;
+    numberTournoi.style.border = borderImputNoErr;
     return true;
   }
 }
@@ -226,14 +241,14 @@ function quantityValid() {
  - on affiche un message d'erreur
  */
 function locationValid() {
- for (let i = 0; i < locations.length; i++) {
-        if (locations[i].checked) {
-                locationMessage.innerHTML = "";
-            return true;
-        }
+
+        if (!loc1.checked && !loc2.checked && !loc3.checked && !loc4.checked && !loc5.checked && !loc6.checked) { 
     locationMessage.innerHTML = errors.errorLocation;
-    locationMessage.style.color='#ff0000';
-    return false;
+    locationMessage.style.color=colorMessageErr;
+    return false; 
+     }else{
+     locationMessage.innerHTML = messageNoErr;
+    return true;
 }
 }
 // checkbox
@@ -244,18 +259,18 @@ function checkbox */
 function checkValid() {
   if (!checkbox.checked) {
  checkboxMessage.innerHTML = errors.errorCheckbox;
-     checkboxMessage.style.color='#ff0000';
+     checkboxMessage.style.color=colorMessageErr;
      return false;
   } else {
-checkboxMessage .innerHTML = "";
+checkboxMessage .innerHTML = messageNoErr;
      return true;
   }
 }
 
 function launchValid() {
-  comfirmForm.style.display = "block";
+  comfirmForm.style.display = display;
 }
 function closeConfirmation() {
-  comfirmForm.style.display = "none";//on ferme avec le bouton fermer
+  comfirmForm.style.display = noDisplay;//on ferme avec le bouton fermer
 }
 closeMessage.addEventListener("click", closeConfirmation);// on ferme avec la croix
