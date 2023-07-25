@@ -35,7 +35,7 @@ const checkboxMessage = document.getElementById('checkboxMessage');
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
-// launch modal form
+// launch modal form 
 function launchModal() {
   modalbg.style.display = display;
 
@@ -87,9 +87,9 @@ const loc4 = locations[3]; // Permet de cibler directement le radio choisi Chica
 const loc5 = locations[4]; // Permet de cibler directement le radio choisi Boston 
 const loc6 = locations[5]; // Permet de cibler directement le radio choisi Portland
 //Regex
-const nameRegEx = new RegExp(/([A-Za-z-]){2,}$/);
+const nameRegEx = new RegExp(/^\w{2,}[a-zA-Z]+(([',. -][a-zA-Z])?[a-zA-Z]*)*$/i);
 const emailRegEx = new RegExp("[a-z0-9]+@[a-z]+.[a-z]{2,3}");
-const quantityRegEx = new RegExp(/([0-9])$/);
+const quantityRegEx = new RegExp(/^([0-9])$/);
 const birthRGEX = new RegExp(/^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/);
 //message error
 
@@ -189,7 +189,7 @@ function emailValid() {
   - on affiche un message d'erreur et le champs devient rouge
   Ensuite :
   on vérifie si :
-  currentYear(l'année actuelle) moins la valeur saisie est inférieur à 18 ans
+ la valeur saisie est inférieur à 18 ans
   Dans ce cas là, on affiche un message d'erreur et le cadre devient rouge
  */
 function birthdateValid() {
@@ -236,7 +236,7 @@ function quantityValid() {
 }
 // location
 /* On vérifie si :
- - au moins une des cases a été validé en parcourant le tableau avec i++
+ - au moins une des cases a été validé 
   Si ce n'est pas le cas :
  - on affiche un message d'erreur
  */
