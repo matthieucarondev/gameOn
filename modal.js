@@ -1,6 +1,4 @@
-const colorMessageErr = "#ff0000";
-const borderImputErr = '2px solid #ff0000';
-const borderImputNoErr=  '2px solid white';
+
 const messageNoErr = "" ;
 const display = "block";
 const noDisplay= "none";
@@ -37,27 +35,26 @@ modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
 // launch modal form 
 function launchModal() {
-  modalbg.style.display = display;
+      modalbg.style.display = display;
+      firstNameMessage.textContent= messageNoErr;
+      firstName.classList.remove('input-invalid');
 
-  firstNameMessage.innerHTML = messageNoErr;
-  firstName.style.border = borderImputNoErr;
+        lastNameMessage.textContent= messageNoErr;
+      lastName.classList.remove('input-invalid');
 
-     lastNameMessage.innerHTML = messageNoErr;
-    lastName.style.border = borderImputNoErr;
+      emailMessage.textContent= messageNoErr;
+      email.classList.remove('input-invalid');
 
-    emailMessage.innerHTML = messageNoErr;
-    email.style.border = borderImputNoErr;
+      birthdatMessage.textContent= messageNoErr;
+      birthdate.classList.remove('input-invalid');
 
-    birthdatMessage.innerHTML = messageNoErr;
-    birthdate.style.border = borderImputNoErr;
+      quantityMessage.textContent= messageNoErr;
+      numberTournoi.classList.remove('input-invalid');
 
-    quantityMessage.innerHTML = messageNoErr;
-    numberTournoi.style.border = borderImputNoErr;
+      locationMessage.textContent= messageNoErr;
 
-    locationMessage.innerHTML = messageNoErr;
+      checkboxMessage.textContent= messageNoErr;
 
-    checkboxMessage .innerHTML = messageNoErr;
-    
 }
 // close modal form & reset
 
@@ -95,28 +92,32 @@ const errors = {
   errorQuantity: "Veuillez entrer un nombre",
   errorLocation: "Veuillez choisir une ville",
   errorCheckbox: "Vous devez valider cette case",
-
 }
+
 //message validation formulaire  plus  fermeture modal
+
 allData.addEventListener("submit", function (event) {
   event.preventDefault();
   if (validateForm()) {
     closeModal();
     launchValid();
+    console.log('ça marche ');
     return true;
   }
   return false
 });
+
 //Les fonctions utilisées pour les input
+
 function validateForm() {
- const isfirstNameValid = firstNameValid()
- const islastNameValid =lastNameValid()
- const isemailValid =  emailValid()
- const isbirthdateValid = birthdateValid()
- const isquantityValid = quantityValid()
- const islocationValid =locationValid()
- const ischeckValid= checkValid()
- return isfirstNameValid && islastNameValid && isemailValid && isbirthdateValid && isquantityValid && islocationValid && ischeckValid }
+        const isfirstNameValid = firstNameValid()
+        const islastNameValid =lastNameValid()
+        const isemailValid =  emailValid()
+        const isbirthdateValid = birthdateValid()
+        const isquantityValid = quantityValid()
+        const islocationValid =locationValid()
+        const ischeckValid= checkValid()
+return isfirstNameValid && islastNameValid && isemailValid && isbirthdateValid && isquantityValid && islocationValid && ischeckValid }
    
 
 
@@ -130,27 +131,29 @@ si ce n'est pas le cas :
  */
 function firstNameValid() {
   
-   
   if (!nameRegEx.test(firstName.value)) {
-    firstNameMessage.innerHTML = errors.errorName;
-    firstNameMessage.style.color= colorMessageErr;
-    firstName.style.border = borderImputErr;
+      firstNameMessage.textContent= errors.errorName;
+      firstNameMessage.classList.add('invalid');
+      firstName.classList.add('input-invalid');
     return false;
   } else {
-      firstNameMessage.innerHTML = messageNoErr;
-    firstName.style.border = borderImputNoErr;
+      firstNameMessage.textContent= messageNoErr;
+      firstNameMessage.classList.remove('invalid');
+      firstName.classList.remove('input-invalid');
     return true;
   }
 }
+
 function lastNameValid() { 
-  if (!nameRegEx.test(lastName.value)) {
-    lastNameMessage.innerHTML = errors.errorName;
-    lastNameMessage.style.color= colorMessageErr;
-    lastName.style.border = borderImputErr;
+
+   if (!nameRegEx.test(lastName.value)) {
+      lastNameMessage.textContent= errors.errorName;
+      lastNameMessage.classList.add('invalid');
+      lastName.classList.add('input-invalid');
     return false;
   } else {
-      lastNameMessage.innerHTML = messageNoErr;
-    lastName.style.border = borderImputNoErr;
+      lastNameMessage.textContent= messageNoErr;
+      lastName.classList.remove('input-invalid');
     return true;
   }
 }
@@ -164,13 +167,13 @@ si ce n'est pas le cas:
 function emailValid() {
   
   if (!emailRegEx.test(email.value)) {
-    emailMessage.innerHTML = errors.errorEmail;
-    emailMessage.style.color =colorMessageErr;
-    email.style.border = borderImputErr;
+      emailMessage.textContent= errors.errorEmail;
+      emailMessage.classList.add('invalid');
+      email.classList.add('input-invalid');
     return false;
   } else {
-      emailMessage.innerHTML = messageNoErr;
-    email.style.border = borderImputNoErr;
+      emailMessage.textContent= messageNoErr;
+      email.classList.remove('input-invalid');
     return true;
   }
 }
@@ -187,6 +190,7 @@ function emailValid() {
   Dans ce cas là, on affiche un message d'erreur et le cadre devient rouge
  */
 function birthdateValid() {
+  
   const vari = new Date(birthdate.value);
   const today = new Date(); //Récupère la date actuelle
   const diffTime = today.getTime() - vari.getTime();//diff entre les date
@@ -194,18 +198,18 @@ function birthdateValid() {
   const age = diffDays / 365.25; // Conversion en années
   
   if (!birthRGEX.test(birthdate.value)) {
-    birthdatMessage.innerHTML = errors.birthdateError;
-     birthdatMessage.style.color=colorMessageErr;
-    birthdate.style.border = borderImputErr;
+      birthdatMessage.textContent= errors.birthdateError;
+      birthdatMessage.classList.add('invalid');
+      birthdate.classList.add('input-invalid');
     return false;
   } else if ((age < 18)) {
-    birthdatMessage.innerHTML = errors.errorBirthdateYear;
-    birthdate.style.border = borderImputErr;
-     birthdatMessage.style.color=colorMessageErr;
+      birthdatMessage.textContent= errors.errorBirthdateYear;
+      birthdate.classList.add('input-invalid');
+      birthdatMessage.classList.add('invalid');
     return false;
   } else {
-    birthdatMessage.innerHTML = messageNoErr;
-    birthdate.style.border = borderImputNoErr;
+      birthdatMessage.textContent= messageNoErr;
+      birthdate.classList.remove('input-invalid');
     return true;
   }
 }
@@ -216,15 +220,14 @@ function birthdateValid() {
  - on affiche un message d'erreur et le cadre du champs devient rouge
  */
 function quantityValid() { 
- 
-  if (numberTournoi.value.length < 1) {
-    quantityMessage.innerHTML = errors.errorQuantity;
-    quantityMessage.style.color=colorMessageErr;
-    numberTournoi.style.border = borderImputErr;
+    if (numberTournoi.value.length < 1) {
+      quantityMessage.textContent= errors.errorQuantity;
+      quantityMessage.classList.add('invalid');
+      numberTournoi.classList.add('input-invalid');
     return false;
   } else {
-    quantityMessage.innerHTML = messageNoErr;
-    numberTournoi.style.border = borderImputNoErr;
+      quantityMessage.textContent= messageNoErr;
+      numberTournoi.classList.remove('input-invalid');
     return true;
   }
 }
@@ -238,11 +241,11 @@ function locationValid() {
 
 const locationChecked = Array.from(locations).find(locations => locations.checked)
   if (locationChecked) { 
-    locationMessage.innerHTML = messageNoErr;
+      locationMessage.textContent= messageNoErr;
     return true;
   }else{
-    locationMessage.innerHTML = errors.errorLocation;
-    locationMessage.style.color=colorMessageErr;
+      locationMessage.textContent= errors.errorLocation;
+      locationMessage.classList.add('invalid');
   return false;
 }
 }
@@ -254,11 +257,11 @@ const locationChecked = Array.from(locations).find(locations => locations.checke
 */
 function checkValid() {
   if (!checkbox.checked) {
- checkboxMessage.innerHTML = errors.errorCheckbox;
-     checkboxMessage.style.color=colorMessageErr;
+      checkboxMessage.textContent= errors.errorCheckbox;
+      checkboxMessage.classList.add('invalid');
      return false;
   } else {
-checkboxMessage .innerHTML = messageNoErr;
+      checkboxMessage.textContent= messageNoErr;
      return true;
   }
 }
