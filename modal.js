@@ -79,17 +79,11 @@ let numberTournoi = document.getElementById('quantity');
 let locations = document.querySelectorAll('input[name="location"]');
 let checkbox = document.getElementById('checkbox1');
 let comfirmForm = document.getElementById("valid-form");
-//  radio  //
-const loc1 = locations[0]; // Permet de cibler directement le radio choisi New York
-const loc2 = locations[1]; // Permet de cibler directement le radio choisi SanFrancisco
-const loc3 = locations[2]; // Permet de cibler directement le radio choisi Seattle
-const loc4 = locations[3]; // Permet de cibler directement le radio choisi Chicago
-const loc5 = locations[4]; // Permet de cibler directement le radio choisi Boston 
-const loc6 = locations[5]; // Permet de cibler directement le radio choisi Portland
+
 //Regex
 const nameRegEx = new RegExp(/^\w{2,}[a-zA-Z]+(([',. -][a-zA-Z])?[a-zA-Z]*)*$/i);
 const emailRegEx = new RegExp("[a-z0-9]+@[a-z]+.[a-z]{2,3}");
-const quantityRegEx = new RegExp(/^([0-9])$/);
+const quantityRegEx = new RegExp("([0-9])$");
 const birthRGEX = new RegExp(/^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/);
 //message error
 
@@ -242,20 +236,22 @@ function quantityValid() {
  */
 function locationValid() {
 
-        if (!loc1.checked && !loc2.checked && !loc3.checked && !loc4.checked && !loc5.checked && !loc6.checked) { 
+const locationChecked = Array.from(locations).find(locations => locations.checked)
+  if (locationChecked) { 
+    locationMessage.innerHTML = messageNoErr;
+    return true;
+  }else{
     locationMessage.innerHTML = errors.errorLocation;
     locationMessage.style.color=colorMessageErr;
-    return false; 
-     }else{
-     locationMessage.innerHTML = messageNoErr;
-    return true;
+  return false;
 }
 }
+
 // checkbox
 /* On vérifie  si :
 - la checkbox n'est pas validé
 - on affiche un message d'erreur
-function checkbox */
+*/
 function checkValid() {
   if (!checkbox.checked) {
  checkboxMessage.innerHTML = errors.errorCheckbox;
