@@ -39,7 +39,7 @@ function launchModal() {
       firstNameMessage.textContent= messageNoErr;
       firstName.classList.remove('input-invalid');
 
-        lastNameMessage.textContent= messageNoErr;
+      lastNameMessage.textContent= messageNoErr;
       lastName.classList.remove('input-invalid');
 
       emailMessage.textContent= messageNoErr;
