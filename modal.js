@@ -79,8 +79,8 @@ let comfirmForm = document.getElementById("valid-form");
 
 //Regex
 const nameRegEx = new RegExp(/^\w{2,}[a-zA-Z]+(([',. -][a-zA-Z])?[a-zA-Z]*)*$/i);
-const emailRegEx = new RegExp("[a-z0-9]+@[a-z]+.[a-z]{2,3}");
-const quantityRegEx = new RegExp("([0-9])$");
+const emailRegEx = new RegExp(/^[a-z0-9]+@([a-z]+)\.[a-z]{2,3}$/);
+const quantityRegEx = new RegExp(/^([0-9])$/);
 const birthRGEX = new RegExp(/^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/);
 //message error
 
